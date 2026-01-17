@@ -1,8 +1,8 @@
 import Image from "next/image"
-import ProductActions from "../../components/product-detail/product-actions";
 import { getProductDetail } from "@/app/services/product.service";
 import priceFormatter from "@/app/utils/price-formatter";
 import { getImageUrl } from "@/app/lib/api";
+import ProductActions from "../../components/product-detail/product-actions";
 
 export type TPageProps = {
   params: Promise<{ id: string }>;
@@ -33,8 +33,7 @@ const ProductDetail = async ({ params }: TPageProps) => {
         <div className="text-primary text-[32px] font-semibold mb-12">
           {priceFormatter(product.price)}
         </div>
-        <div className="mb-5">Stock Product : {product.stock}</div>
-        {/* <ProductActions product={product} stock={product.stock} /> */}
+        <ProductActions product={product} stock={product.stock} />
       </div>
     </main>
   );
