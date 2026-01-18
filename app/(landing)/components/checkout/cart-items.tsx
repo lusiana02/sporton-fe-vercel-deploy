@@ -10,7 +10,10 @@ import { useCartStore } from "@/app/hooks/use-cart-store";
 import { get } from "http";
 import { getImageUrl } from "@/app/lib/api";
 
-const CartItems = () => {
+type TCartItems = {
+  handlePayment: () => void;
+}
+const CartItems = ({handlePayment}: TCartItems) => {
   const {items, removeItem} = useCartStore();
   const { push } = useRouter();
 
@@ -18,10 +21,6 @@ const CartItems = () => {
     (total, item) => total + item.price * item.qty,
     0
   );
-
-  const payment = () => {
-    push("/payment");
-  };
 
   return (
     <CardWithHeader title="Cart Items">
@@ -67,7 +66,7 @@ const CartItems = () => {
         <Button
           variant="dark"
           className="w-full mt-4"
-          onClick={() => push("/payment")}
+          onClick={handlePayment}
         >
           <FiCreditCard />
           Proceed to Payment

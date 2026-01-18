@@ -1,13 +1,15 @@
 "use client";
-import { useState } from "react";
-import CardWithHeader from "../ui/cart-with-header";
 
-const OrderInformation = () => {
-  const [formData, setFormData] = useState({
-    customerName: "",
-    customerContact: "",
-    customerAddress: "",
-  })
+import CardWithHeader from "../ui/cart-with-header";
+import { CustomerInfo } from "@/app/hooks/use-cart-store";
+
+type TOrderInformation = {
+  formData: CustomerInfo;
+  setFormData: React.Dispatch<React.SetStateAction<CustomerInfo>>;
+}
+
+const OrderInformation = ({formData, setFormData}: TOrderInformation) => {
+  
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({...formData, [e.target.name]: e.target.value});
@@ -32,7 +34,7 @@ const OrderInformation = () => {
             placeholder="Type your whatsapp number"
             id="customerContact"
             name="customerContact"
-            value={formData.customerContact} 
+            value={formData.customerContact ?? ""} 
             onChange={handleInputChange}
           />
         </div>
